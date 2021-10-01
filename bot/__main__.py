@@ -31,12 +31,12 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>Bot Uptime:</b> <code>{currentTime}</code>\n' \
-            f'<b>Total Disk Space:</b> <code>{total}</code>\n' \
-            f'<b>Used:</b> <code>{used}</code> ' \
-            f'<b>Free:</b> <code>{free}</code>\n\n' \
-            f'<b>Upload:</b> <code>{sent}</code>\n' \
-            f'<b>Download:</b> <code>{recv}</code>\n\n' \
+    stats = f'<b>👾Waktu Aktif Bot:</b> <code>{currentTime}</code>\n' \
+            f'<b>💾Total Ruang Disk:</b> <code>{total}</code>\n' \
+            f'<b>📀Digunakan:</b> <code>{used}</code> ' \
+            f'<b>💿Bebas:</b> <code>{free}</code>\n\n' \
+            f'<b>📤Unggah:</b> <code>{sent}</code>\n' \
+            f'<b>📥Unduh:</b> <code>{recv}</code>\n\n' \
             f'<b>CPU:</b> <code>{cpuUsage}%</code> ' \
             f'<b>RAM:</b> <code>{memory}%</code> ' \
             f'<b>DISK:</b> <code>{disk}%</code>'
@@ -50,13 +50,13 @@ def start(update, context):
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
-This bot can mirror all your links to Google Drive!
-Type /{BotCommands.HelpCommand} to get a list of available commands
+Bot ini dapat mencerminkan semua tautan Anda ke Google Drive!
+Ketik /{BotCommands.HelpCommand} untuk mendapatkan daftar perintah yang tersedia
 '''
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
         sendMarkup(
-            'Oops! not a Authorized user.',
+            'Ups! bukan pengguna Resmis.',
             context.bot,
             update,
             reply_markup,
@@ -87,71 +87,65 @@ def log(update, context):
 
 
 help_string_telegraph = f'''<br>
-<b>/{BotCommands.HelpCommand}</b>: To get this message
+<b>/{BotCommands.HelpCommand}</b>: Untuk mendapatkan pesan ini
 <br><br>
-<b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Start mirroring the link to Google Drive.
+<b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring link ke Google Drive.
 <br><br>
-<b>/{BotCommands.TarMirrorCommand}</b> [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
+<b>/{BotCommands.TarMirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring dan unggah versi unduhan (.tar) yang diarsipkan
 <br><br>
-<b>/{BotCommands.ZipMirrorCommand}</b> [download_url][magnet_link]: Start mirroring and upload the archived (.zip) version of the download
+<b>/{BotCommands.ZipMirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring dan unggah versi unduhan (.zip) yang diarsipkan
 <br><br>
-<b>/{BotCommands.UnzipMirrorCommand}</b> [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
+<b>/{BotCommands.UnzipMirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring dan jika file yang diunduh adalah arsip apa pun, ekstrak ke Google Drive
 <br><br>
-<b>/{BotCommands.QbMirrorCommand}</b> [magnet_link]: Start Mirroring using qBittorrent, Use <b>/{BotCommands.QbMirrorCommand} s</b> to select files before downloading
+<b>/{BotCommands.QbMirrorCommand}</b> [magnet_link]: Mulai Mencerminkan menggunakan qBittorrent, Gunakan <b>/{BotCommands.QbMirrorCommand} s</b> untuk memilih file sebelum mengunduh
 <br><br>
-<b>/{BotCommands.QbTarMirrorCommand}</b> [magnet_link]: Start mirroring using qBittorrent and upload the archived (.tar) version of the download
+<b>/{BotCommands.QbTarMirrorCommand}</b> [magnet_link]: Mulai mirroring menggunakan qBittorrent dan unggah versi unduhan (.tar) yang diarsipkan
 <br><br>
-<b>/{BotCommands.QbZipMirrorCommand}</b> [magnet_link]: Start mirroring using qBittorrent and upload the archived (.zip) version of the download
+<b>/{BotCommands.QbZipMirrorCommand}</b> [magnet_link]: Mulai mirroring menggunakan qBittorrent dan unggah versi unduhan (.zip) yang diarsipkan
 <br><br>
-<b>/{BotCommands.QbUnzipMirrorCommand}</b> [magnet_link]: Starts mirroring using qBittorrent and if downloaded file is any archive, extracts it to Google Drive
+<b>/{BotCommands.QbUnzipMirrorCommand}</b> [magnet_link]: Mulai mirroring menggunakan qBittorrent dan jika file yang diunduh adalah arsip apa pun, ekstrak ke Google Drive
 <br><br>
-<b>/{BotCommands.LeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.LeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.TarLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.tar). [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.TarLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.tar). [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.ZipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.zip). [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.ZipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.zip). [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.UnzipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and if file is any archive, extracts it. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.UnzipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan jika file adalah arsip apa pun, ekstraklah. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.QbLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.QbTarLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.tar) using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbTarLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.tar) menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.QbZipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.zip) using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbZipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.zip) menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.QbUnzipLeechCommand}</b> This command should be used as reply to Magnet link, Torrent link, or Direct link and if file is any archive, extracts it using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbUnzipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan jika file adalah arsip apa pun, ekstrak menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
 <br><br>
-<b>/{BotCommands.CloneCommand}</b> [drive_url]: Copy file/folder to Google Drive
+<b>/{BotCommands.CloneCommand}</b> [drive_url]: Salin file/folder ke Google Drive
 <br><br>
-<b>/{BotCommands.CountCommand}</b> [drive_url]: Count file/folder of Google Drive Links
+<b>/{BotCommands.CountCommand}</b> [drive_url]: Hitung file/folder Link Google Drive
 <br><br>
-<b>/{BotCommands.DeleteCommand}</b> [drive_url]: Delete file from Google Drive (Only Owner & Sudo)
+<b>/{BotCommands.DeleteCommand}</b> [drive_url]: Hapus file dari Google Drive (Hanya Pemilik & Sudo)
 <br><br>
-<b>/{BotCommands.WatchCommand}</b> [youtube-dl supported link]: Mirror through youtube-dl. Click <b>/{BotCommands.WatchCommand}</b> for more help
+<b>/{BotCommands.WatchCommand}</b> [tautan yang didukung youtube-dl]: Mencerminkan melalui youtube-dl. Klik <b>/{BotCommands.WatchCommand}</b> untuk bantuan lebih lanjut
 <br><br>
-<b>/{BotCommands.TarWatchCommand}</b> [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
+<b>/{BotCommands.TarWatchCommand}</b> [tautan yang didukung youtube-dl]: Cerminkan melalui youtube-dl dan tar sebelum mengunggah
 <br><br>
-<b>/{BotCommands.ZipWatchCommand}</b> [youtube-dl supported link]: Mirror through youtube-dl and zip before uploading
+<b>/{BotCommands.ZipWatchCommand}</b> [tautan yang didukung youtube-dl]: Cerminkan melalui youtube-dl dan zip sebelum mengunggah
 <br><br>
-<b>/{BotCommands.LeechWatchCommand}</b> Leech through youtube-dl 
+<b>/{BotCommands.LeechWatchCommand}</b> Lintah melalui youtube-dl
 <br><br>
-<b>/{BotCommands.LeechTarWatchCommand}</b> Leech through youtube-dl and tar before uploading 
+<b>/{BotCommands.LeechTarWatchCommand}</b> Lintah melalui youtube-dl dan tar sebelum mengunggah
 <br><br>
-<b>/{BotCommands.LeechZipWatchCommand}</b> Leech through youtube-dl and zip before uploading 
+<b>/{BotCommands.LeechZipWatchCommand}</b> Lintah melalui youtube-dl dan zip sebelum mengunggah
 <br><br>
-<b>/{BotCommands.LeechSetCommand}</b> Leech Settings 
+<b>/{BotCommands.LeechSetCommand}</b> Setelan Lintah
 <br><br>
-<b>/{BotCommands.SetThumbCommand}</b> Reply to photo to set it as thumbnail for next uploads 
+<b>/{BotCommands.SetThumbCommand}</b> Balas ke foto untuk menetapkannya sebagai thumbnail untuk unggahan berikutnya
 <br><br>
-<b>/{BotCommands.CancelMirror}</b>: Reply to the message by which the download was initiated and that download will be cancelled
+<b>/{BotCommands.CancelMirror}</b>: Membalas pesan di mana unduhan dimulai dan unduhan itu akan dibatalkan
 <br><br>
-<b>/{BotCommands.CancelAllCommand}</b>: Cancel all running tasks
-<br><br>
-<b>/{BotCommands.ListCommand}</b> [search term]: Searches the search term in the Google Drive, If found replies with the link
-<br><br>
-<b>/{BotCommands.StatusCommand}</b>: Shows a status of all the downloads
-<br><br>
-<b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
+<b>/{BotCommands.CancelAllCommand}</b>: Batalkan semua yang sedang berjalan
 '''
 help = Telegraph(access_token=telegraph_token).create_page(
         title='OverMod Help',
@@ -161,34 +155,34 @@ help = Telegraph(access_token=telegraph_token).create_page(
     )["path"]
 
 help_string = f'''
-/{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
+/{BotCommands.PingCommand}: Periksa berapa lama waktu yang dibutuhkan untuk melakukan Ping ke Bot
 
-/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
+/{BotCommands.AuthorizeCommand}: Mengotorisasi obrolan atau pengguna untuk menggunakan bot (Hanya dapat dipanggil oleh Pemilik & Sudo bot)
 
-/{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
+/{BotCommands.UnAuthorizeCommand}: Membatalkan otorisasi obrolan atau pengguna untuk menggunakan bot (Hanya dapat dipanggil oleh Pemilik & Sudo bot)
 
-/{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
+/{BotCommands.AuthorizedUsersCommand}: Menampilkan pengguna yang diotorisasi (Hanya Pemilik & Sudo)
 
-/{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)
+/{BotCommands.AddSudoCommand}: Tambahkan pengguna sudo (Hanya Pemilik)
 
-/{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)
+/{BotCommands.RmSudoCommand}: Hapus pengguna sudo (Hanya Pemilik)
 
-/{BotCommands.RestartCommand}: Restart the bot
+/{BotCommands.RestartCommand}: Mulai ulang bot
 
-/{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
+/{BotCommands.LogCommand}: Dapatkan file log bot. Berguna untuk mendapatkan laporan kerusakan
 
-/{BotCommands.SpeedCommand}: Check Internet Speed of the Host
+/{BotCommands.SpeedCommand}: Memeriksa Kecepatan Internet Tuan Rumah
 
-/{BotCommands.ShellCommand}: Run commands in Shell (Only Owner)
+/{BotCommands.ShellCommand}: Menjalankan perintah di Shell (Hanya Pemilik)
 
-/{BotCommands.ExecHelpCommand}: Get help for Executor module (Only Owner)
+/{BotCommands.ExecHelpCommand}: Dapatkan bantuan untuk modul Executor (Hanya Pemilik)
 
-/{BotCommands.TsHelpCommand}: Get help for Torrent search module
+/{BotCommands.TsHelpCommand}: Dapatkan bantuan untuk modul pencarian Torrent
 '''
 
 def bot_help(update, context):
     button = button_build.ButtonMaker()
-    button.buildbutton("Other Commands", f"https://telegra.ph/{help}")
+    button.buildbutton("Perintah lainnya🛠", f"https://telegra.ph/{help}")
     reply_markup = InlineKeyboardMarkup(button.build_menu(1))
     sendMarkup(help_string, context.bot, update, reply_markup)
 
@@ -233,7 +227,7 @@ def main():
         os.remove(".restartmsg")
     elif OWNER_ID:
         try:
-            text = "<b>Bot Restarted!</b>"
+            text = "<b>OverMod Siap Bertugas✨!</b>"
             bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
             if AUTHORIZED_CHATS:
                 for i in AUTHORIZED_CHATS:

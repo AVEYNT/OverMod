@@ -19,7 +19,7 @@ from bot.helper.telegram_helper import button_build
 def leechSet(update, context):
     user_id = update.message.from_user.id
     path = f"Thumbnails/{user_id}.jpg"
-    msg = f"Leech Type for {user_id} user is "
+    msg = f"Jenis Leech untuk pengguna {user_id} adalah "
     if (
         user_id in AS_DOC_USERS
         or user_id not in AS_MEDIA_USERS
@@ -28,14 +28,14 @@ def leechSet(update, context):
         msg += "DOCUMENT"
     else:
         msg += "MEDIA"
-    msg += "\nCustom Thmubnail "
-    msg += "exists" if os.path.exists(path) else "not exists"
+    msg += "\nThmubnail Kustom "
+    msg += "ada" if os.path.exists(path) else "tidak ada"
     buttons = button_build.ButtonMaker()
-    buttons.sbutton("As Document", f"doc {user_id}")
-    buttons.sbutton("As Media", f"med {user_id}")
-    buttons.sbutton("Delete Thumbnail", f"thumb {user_id}")
+    buttons.sbutton("Sebagai Dokumen", f"doc {user_id}")
+    buttons.sbutton("Sebagai Media", f"med {user_id}")
+    buttons.sbutton("Hapus Thumbnail", f"thumb {user_id}")
     if AUTO_DELETE_MESSAGE_DURATION == -1:
-        buttons.sbutton("Close", f"closeset {user_id}")
+        buttons.sbutton("Tutup", f"closeset {user_id}")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
     choose_msg = sendMarkup(msg, context.bot, update, button)
     threading.Thread(target=auto_delete_message, args=(context.bot, update.message, choose_msg)).start()

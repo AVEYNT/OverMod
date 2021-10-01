@@ -76,8 +76,8 @@ class QbDownloadStatus(Status):
         return self.__gid
 
     def cancel_download(self):
-        LOGGER.info(f"Cancelling Download: {self.name()}")
+        LOGGER.info(f"Membatalkan Unduh: {self.name()}")
         self.client.torrents_pause(torrent_hashes=self.__hash)
         sleep(0.3)
-        self.listener.onDownloadError('Download stopped by user!')
+        self.listener.onDownloadError('Unduh dihentikan oleh pengguna!')
         self.client.torrents_delete(torrent_hashes=self.__hash)

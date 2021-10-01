@@ -17,11 +17,11 @@ def _watch(bot: Bot, update, isTar=False, isZip=False, isLeech=False):
     try:
         link = message_args[1]
     except IndexError:
-        msg = f"/{BotCommands.WatchCommand} [youtube-dl supported link] [quality] |[CustomName] to mirror with youtube-dl.\n\n"
-        msg += "<b>Note: Quality and custom name are optional</b>\n\nExample of quality: audio, 144, 240, 360, 480, 720, 1080, 2160."
-        msg += "\n\nIf you want to use custom filename, enter it after |"
-        msg += f"\n\nExample:\n<code>/{BotCommands.WatchCommand} https://youtu.be/LmBYPXGqtss 720 |OverMod</code>\n\n"
-        msg += "This file will be downloaded in 720p quality and it's name will be <b>OverMod</b>"
+        msg = f"/{BotCommands.WatchCommand} [tautan yang didukung youtube-dl] [kualitas] |[NamaKustom] untuk dicerminkan dengan youtube-dl.\n\n"
+        msg += "<b>Catatan: Kualitas dan nama kustom bersifat opsional</b>\n\nContoh kualitas: audio, 144, 240, 360, 480, 720, 1080, 2160."
+        msg += "\n\nJika Anda ingin menggunakan nama file khusus, masukkan setelahnya |"
+        msg += f"\n\nContoh:\n<code>/{BotCommands.WatchCommand} https://youtu.be/LmBYPXGqtss 720 |OverMod</code>\n\n"
+        msg += "File ini akan diunduh dalam kualitas 720p dan namanya adalah <b>OverMod</b>"
         sendMessage(msg, bot, update)
         return
     

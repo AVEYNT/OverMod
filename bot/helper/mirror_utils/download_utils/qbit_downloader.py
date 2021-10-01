@@ -56,7 +56,7 @@ class QbitTorrent:
                 if tor_info[0].state == "pausedDL":
                     self.client.torrents_delete(torrent_hashes=self.ext_hash)
                 else:
-                    sendMessage("This Torrent is already in list.", listener.bot, listener.update)
+                    sendMessage("Torrent ini sudah ada dalam daftar.", listener.bot, listener.update)
                     self.client.auth_log_out()
                     return
             if is_file:
@@ -69,7 +69,7 @@ class QbitTorrent:
                 if len(tor_info) == 0:
                     while True:
                         if time.time() - self.meta_time >= 20:
-                            sendMessage("The Torrent was not added. Report when you see this error", listener.bot, listener.update)
+                            sendMessage("Torrent tidak ditambahkan. Laporkan saat Anda melihat kesalahan ini", listener.bot, listener.update)
                             self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
                             self.client.auth_log_out()
                             return False
@@ -77,7 +77,7 @@ class QbitTorrent:
                         if len(tor_info) > 0:
                             break
             else:
-                sendMessage("This is an unsupported/invalid link.", listener.bot, listener.update)
+                sendMessage("Ini adalah tautan yang tidak didukung/tidak valid.", listener.bot, listener.update)
                 self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
                 self.client.auth_log_out()
                 return
@@ -85,11 +85,11 @@ class QbitTorrent:
             with download_dict_lock:
                 download_dict[listener.uid] = QbDownloadStatus(gid, listener, self.ext_hash, self.client)
             tor_info = tor_info[0]
-            LOGGER.info(f"QbitDownload started: {tor_info.name}")
+            LOGGER.info(f"QbitDownload dimulai: {tor_info.name}")
             self.updater = setInterval(self.update_interval, self.update)
             if BASE_URL is not None and qbitsel:
                 if not is_file:
-                    meta = sendMessage("Downloading Metadata...Please wait then you can select files or mirror Torrent file if it have low seeders", listener.bot, listener.update)
+                    meta = sendMessage("Mengunduh Metadata... Harap tunggu lalu Anda dapat memilih file atau mencerminkan file Torrent jika memiliki seeder rendah", listener.bot, listener.update)
                     while True:
                             tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
                             if len(tor_info) == 0:
@@ -114,21 +114,21 @@ class QbitTorrent:
                         count += 1
                     if count == 4:
                         break
-                URL = f"{BASE_URL}/eunha/files/{self.ext_hash}"
+                URL = f"{BASE_URL}/overmod/files/{self.ext_hash}"
                 pindata = f"pin {gid} {pincode}"
                 donedata = f"done {gid} {self.ext_hash}"
                 buttons = button_build.ButtonMaker()
-                buttons.buildbutton("Select Files", URL)
-                buttons.sbutton("Pincode", pindata)
-                buttons.sbutton("Done Selecting", donedata)
+                buttons.buildbutton("Pilih File", URL)
+                buttons.sbutton("PinCode", pindata)
+                buttons.sbutton("Selesai Memilih", donedata)
                 QBBUTTONS = InlineKeyboardMarkup(buttons.build_menu(2))
-                msg = "Your download paused. Choose files then press Done Selecting button to start downloading."
+                msg = "Unduhan Anda dijeda. Pilih file lalu tekan tombol Selesai Memilih untuk mulai mengunduh."
                 sendMarkup(msg, listener.bot, listener.update, QBBUTTONS)
             else:
                 sendStatusMessage(listener.update, listener.bot)
         except qba.UnsupportedMediaType415Error as e:
             LOGGER.error(str(e))
-            sendMessage("This is an unsupported/invalid link: {str(e)}", listener.bot, listener.update)
+            sendMessage("Ini adalah tautan yang tidak didukung/tidak valid: {str(e)}", listener.bot, listener.update)
             self.client.torrents_delete(torrent_hashes=self.ext_hash, delete_files=True)
             self.client.auth_log_out()
         except Exception as e:
@@ -151,7 +151,7 @@ class QbitTorrent:
                 if time.time() - self.meta_time >= 999999999: # timeout while downloading metadata
                     self.client.torrents_pause(torrent_hashes=self.ext_hash)
                     time.sleep(0.3)
-                    self.listener.onDownloadError("Dead Torrent!")
+                    self.listener.onDownloadError("Torrent Mati!")
                     self.client.torrents_delete(torrent_hashes=self.ext_hash)
                     self.client.auth_log_out()
                     self.updater.cancel()
@@ -170,7 +170,7 @@ class QbitTorrent:
                     if result:
                         self.client.torrents_pause(torrent_hashes=self.ext_hash)
                         time.sleep(0.3)
-                        self.listener.onDownloadError(f"{mssg}.\nYour File/Folder size is {get_readable_file_size(size)}")
+                        self.listener.onDownloadError(f"{mssg}.\nUkuran File/Folder Anda adalah {get_readable_file_size(size)}")
                         self.client.torrents_delete(torrent_hashes=self.ext_hash)
                         self.client.auth_log_out()
                         self.updater.cancel()
@@ -178,18 +178,18 @@ class QbitTorrent:
                 if time.time() - self.stalled_time >= 999999999: # timeout after downloading metadata
                     self.client.torrents_pause(torrent_hashes=self.ext_hash)
                     time.sleep(0.3)
-                    self.listener.onDownloadError("Dead Torrent!")
+                    self.listener.onDownloadError("Torrent Mati!")
                     self.client.torrents_delete(torrent_hashes=self.ext_hash)
                     self.client.auth_log_out()
                     self.updater.cancel()
             elif tor_info.state == "error":
                 self.client.torrents_pause(torrent_hashes=self.ext_hash)
                 time.sleep(0.3)
-                self.listener.onDownloadError("No enough space for this torrent on device")
+                self.listener.onDownloadError("Tidak ada cukup ruang untuk torrent ini di perangkat")
                 self.client.torrents_delete(torrent_hashes=self.ext_hash)
                 self.client.auth_log_out()
                 self.updater.cancel()
-            elif tor_info.state == "uploading" or tor_info.state.lower().endswith("up"):
+            elif tor_info.state == "mengunggah" or tor_info.state.lower().endswith("up"):
                 self.client.torrents_pause(torrent_hashes=self.ext_hash)
                 if self.qbitsel:
                     for dirpath, subdir, files in os.walk(f"{self.dire}", topdown=False):
@@ -218,11 +218,11 @@ def get_confirm(update, context):
     data = data.split(" ")
     qdl = getDownloadByGid(data[1])
     if qdl is None:
-        query.answer(text="This task has been cancelled!", show_alert=True)
+        query.answer(text="Tugas ini telah dibatalkan!", show_alert=True)
         query.message.delete()
 
     elif user_id != qdl.listener.message.from_user.id:
-        query.answer(text="Don't waste your time!", show_alert=True)
+        query.answer(text="Jangan buang waktumu!", show_alert=True)
     elif data[0] == "pin":
         query.answer(text=data[2], show_alert=True)
     elif data[0] == "done":

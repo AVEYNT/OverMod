@@ -192,7 +192,7 @@ class MirrorListener(listeners.MirrorListeners):
             uname = f"@{self.message.from_user.username}"
         else:
             uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
-        msg = f"{uname} your download has been stopped due to: {error}"
+        msg = f"{uname} unduhan Anda telah dihentikan karena: {error}"
         sendMessage(msg, self.bot, self.update)
         if count == 0:
             self.clean()
@@ -214,14 +214,14 @@ class MirrorListener(listeners.MirrorListeners):
             chat_id = str(self.message.chat.id)
             count = len(files)
             if OWNER_ID  == int(chat_id):
-                msg = f'Name: {link}\n'
-                msg += f'Total Files: {count}'
+                msg = f'Nama: {link}\n'
+                msg += f'Jumlah File: {count}'
                 sendMessage(msg, self.bot, self.update)
             else:
                 chat_id = chat_id[4:]
-                msg = f"Name: <a href='https://t.me/c/{chat_id}/{self.uid}'>{link}</a>\n"
-                msg += f'Total Files: {count}\n'
-                msg += f'cc: {uname}\n\n'
+                msg = f"Nama: <a href='https://t.me/c/{chat_id}/{self.uid}'>{link}</a>\n"
+                msg += f'Jumlah File: {count}\n'
+                msg += f'Pengguna: {uname}\n\n'
                 fmsg = ''
                 for index, item in enumerate(list(files), start=1):
                     msg_id = files[item]
@@ -245,19 +245,19 @@ class MirrorListener(listeners.MirrorListeners):
                 update_all_messages()
             return
         with download_dict_lock:
-            msg = f'<b>Filename: </b><code>{download_dict[self.uid].name()}</code>\n<b>Size: </b><code>{size}</code>'
+            msg = f'<b>🗂NamaFile: </b><code>{download_dict[self.uid].name()}</code>\n<b>💾Ukuran: </b><code>{size}</code>'
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
-                msg += '\n<b>Type: </b><code>Folder</code>'
-                msg += f'\n<b>SubFolders: </b><code>{folders}</code>'
-                msg += f'\n<b>Files: </b><code>{files}</code>'
+                msg += '\n<b>🔬Tipe: </b><code>Folder</code>'
+                msg += f'\n<b>🗃SubFolder: </b><code>{folders}</code>'
+                msg += f'\n<b>📄File: </b><code>{files}</code>'
             else:
-                msg += f'\n<b>Type: </b><code>{typ}</code>'
+                msg += f'\n<b>🔬Tipe: </b><code>{typ}</code>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
                 surl = short_url(link)
-                buttons.buildbutton("☁️ Drive Link", surl)
+                buttons.buildbutton("🔹 Tautan Drive", surl)
             else:
-                buttons.buildbutton("☁️ Drive Link", link)
+                buttons.buildbutton("🔹 Tautan Drive", link)
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 url_path = requests.utils.quote(f'{download_dict[self.uid].name()}')
@@ -266,21 +266,21 @@ class MirrorListener(listeners.MirrorListeners):
                     share_url += '/'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = short_url(share_url)
-                        buttons.buildbutton("⚡ Index Link", siurl)
+                        buttons.buildbutton("🔸 Tautan Indeks", siurl)
                     else:
-                        buttons.buildbutton("⚡ Index Link", share_url)
+                        buttons.buildbutton("🔸 Tautan Indeks", share_url)
                 else:
                     share_urls = f'{INDEX_URL}/{url_path}?a=view'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = short_url(share_url)
-                        buttons.buildbutton("⚡ Index Link", siurl)
+                        buttons.buildbutton("🔸 Tautan Indeks", siurl)
                         if VIEW_LINK:
                             siurls = short_url(share_urls)
-                            buttons.buildbutton("🌐 View Link", siurls)
+                            buttons.buildbutton("♦️ Lihat Tautan", siurls)
                     else:
-                        buttons.buildbutton("⚡ Index Link", share_url)
+                        buttons.buildbutton("🔸 Tautan Indeks", share_url)
                         if VIEW_LINK:
-                            buttons.buildbutton("🌐 View Link", share_urls)
+                            buttons.buildbutton("♦️ Lihat Tautan", share_urls)
             if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
                 buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
             if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
@@ -292,7 +292,8 @@ class MirrorListener(listeners.MirrorListeners):
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             if uname is not None:
-                msg += f'\n\ncc: {uname}'
+                msg += f'\n\n👤Penggunna: {uname}'
+                msg += f'\n🗂File anda masuk database kami \n🚫Jangan sebar tautan indeks'
             try:
                 fs_utils.clean_download(download_dict[self.uid].path())
             except FileNotFoundError:
@@ -401,11 +402,11 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
             open(file_name, "wb").write(resp.content)
             link = f"{file_name}"
         else:
-            sendMessage("ERROR: link got HTTP response:" + resp.status_code, bot, update)
+            sendMessage("KESALAHAN: tautan mendapat respons HTTP:" + resp.status_code, bot, update)
             return
 
     elif not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('No download source provided', bot, update)
+        sendMessage('Tidak ada sumber unduhan yang disediakan', bot, update)
         return
     elif not os.path.exists(link) and not bot_utils.is_mega_link(link) and not bot_utils.is_gdrive_link(link) and not bot_utils.is_magnet(link):
         try:
@@ -423,7 +424,7 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
 
     if bot_utils.is_gdrive_link(link):
         if not isTar and not extract and not isLeech:
-            sendMessage(f"Use /{BotCommands.CloneCommand} to clone Google Drive file/folder\nUse /{BotCommands.TarMirrorCommand} to make tar of Google Drive folder\nUse /{BotCommands.UnzipMirrorCommand} to extracts archive Google Drive file", bot, update)
+            sendMessage(f"Gunakan /{BotCommands.CloneCommand} untuk mengkloning file/folder Google Drive\nGunakan /{BotCommands.TarMirrorCommand} untuk membuat tar folder Google Drive\nGunakan /{BotCommands.UnzipMirrorCommand} untuk mengekstrak arsip file Google Drive", bot, update)
             return
         res, size, name, files = gdriveTools.GoogleDriveHelper().clonehelper(link)
         if res != "":
@@ -432,7 +433,7 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
         if TAR_UNZIP_LIMIT is not None:
             result = bot_utils.check_limit(size, TAR_UNZIP_LIMIT)
             if result:
-                msg = f'Failed, Tar/Unzip limit is {TAR_UNZIP_LIMIT}.\nYour File/Folder size is {get_readable_file_size(size)}.'
+                msg = f'Gagal, batas Tar/Unzip adalah {TAR_UNZIP_LIMIT}.\nUkuran File/Folder Anda adalah{get_readable_file_size(size)}.'
                 sendMessage(msg, bot, update)
                 return
         LOGGER.info(f"Download Name : {name}")
@@ -446,11 +447,11 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
 
     elif bot_utils.is_mega_link(link):
         if BLOCK_MEGA_LINKS:
-            sendMessage("Mega links are blocked!", bot, update)
+            sendMessage("Tautan mega diblokir!", bot, update)
             return
         link_type = bot_utils.get_mega_link_type(link)
         if link_type == "folder" and BLOCK_MEGA_FOLDER:
-            sendMessage("Mega folder are blocked!", bot, update)
+            sendMessage("Folder mega diblokir!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)

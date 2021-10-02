@@ -28,7 +28,7 @@ def leechSet(update, context):
         msg += "DOCUMENT"
     else:
         msg += "MEDIA"
-    msg += "\nThmubnail Kustom "
+    msg += "\nThumbnail Kustom "
     msg += "ada" if os.path.exists(path) else "tidak ada"
     buttons = button_build.ButtonMaker()
     buttons.sbutton("Sebagai Dokumen", f"doc {user_id}")
@@ -93,12 +93,11 @@ def setThumb(update, context):
         des_dir = os.path.join(path, str(user_id) + ".jpg")
         # Image.open(photo_dir).convert("RGB").save(photo_dir)
         img = Image.open(photo_dir)
-        w, h = img.size
-        img.thumbnail((320, h))
-        # img.resize((320, h))
+        img.thumbnail((480, 320))
+        # img.resize((480, 320))
         img.save(des_dir, "JPEG")
         os.remove(photo_dir)
-        sendMessage(f"Thumbnail khusus disimpan untuk pengguna {user_id}.", context.bot, update)
+        sendMessage(f"Thumbnail khusus disimpan untuk pengguna <code>{user_id}</code> user.", context.bot, update)
     else:
         sendMessage("Balas foto untuk menyimpan thumbnail khusus.", context.bot, update)
 

@@ -56,7 +56,7 @@ Ketik /{BotCommands.HelpCommand} untuk mendapatkan daftar perintah yang tersedia
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
         sendMarkup(
-            'Ups! bukan pengguna Resmis.',
+            'Ups! bukan pengguna Resmi.',
             context.bot,
             update,
             reply_markup,
@@ -64,7 +64,7 @@ Ketik /{BotCommands.HelpCommand} untuk mendapatkan daftar perintah yang tersedia
 
 
 def restart(update, context):
-    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
+    restart_message = sendMessage("Mulai ulang, Harap tunggu!", context.bot, update)
     # Save restart message object in order to reply to it after restarting
     with open(".restartmsg", "w") as f:
         f.truncate(0)
@@ -77,7 +77,7 @@ def restart(update, context):
 
 def ping(update, context):
     start_time = int(round(time.time() * 1000))
-    reply = sendMessage("Starting Ping", context.bot, update)
+    reply = sendMessage("Memulai Ping", context.bot, update)
     end_time = int(round(time.time() * 1000))
     editMessage(f'{end_time - start_time} ms', reply)
 
@@ -223,7 +223,7 @@ def main():
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        bot.edit_message_text("Berhasil memulai ulang!", chat_id, msg_id)
         os.remove(".restartmsg")
     elif OWNER_ID:
         try:

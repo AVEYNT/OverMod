@@ -46,38 +46,38 @@ def setLeechType(update, context):
     data = query.data
     data = data.split(" ")
     if user_id != int(data[1]):
-        query.answer(text="Not Yours!", show_alert=True)
+        query.answer(text="Bukan milikmu!", show_alert=True)
     elif data[0] == "doc":
         if (
             user_id in AS_DOC_USERS
             or user_id not in AS_MEDIA_USERS
             and AS_DOCUMENT
         ):
-            query.answer(text="Already As Document!", show_alert=True)
+            query.answer(text="Sudah Sebagai Dokumen!", show_alert=True)
         elif user_id in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(user_id)
             AS_DOC_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="Selesai!", show_alert=True)
         else:
             AS_DOC_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="Selesai!", show_alert=True)
     elif data[0] == "med":
         if user_id in AS_DOC_USERS:
             AS_DOC_USERS.remove(user_id)
             AS_MEDIA_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="Selesai!", show_alert=True)
         elif user_id in AS_MEDIA_USERS or not AS_DOCUMENT:
-            query.answer(text="Already As Media!", show_alert=True)
+            query.answer(text="Sudah Sebagai Media!", show_alert=True)
         else:
             AS_MEDIA_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="Selesai!", show_alert=True)
     elif data[0] == "thumb":
         path = f"Thumbnails/{user_id}.jpg"
         if os.path.lexists(path):
             os.remove(path)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="Selesai!", show_alert=True)
         else:
-            query.answer(text="No Thumbnail To Delete!", show_alert=True)
+            query.answer(text="Tidak Ada Thumbnail Untuk Dihapus!", show_alert=True)
     elif data[0] == "closeset":
         query.message.delete()
 
@@ -98,9 +98,9 @@ def setThumb(update, context):
         # img.resize((320, h))
         img.save(des_dir, "JPEG")
         os.remove(photo_dir)
-        sendMessage(f"Custom thumbnail saved for {user_id} user.", context.bot, update)
+        sendMessage(f"Thumbnail khusus disimpan untuk pengguna {user_id}.", context.bot, update)
     else:
-        sendMessage("Reply to a photo to save custom thumbnail.", context.bot, update)
+        sendMessage("Balas foto untuk menyimpan thumbnail khusus.", context.bot, update)
 
 leech_set_handler = CommandHandler(BotCommands.LeechSetCommand, leechSet, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 set_thumbnail_handler = CommandHandler(BotCommands.SetThumbCommand, setThumb, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)

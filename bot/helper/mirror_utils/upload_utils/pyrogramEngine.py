@@ -158,4 +158,4 @@ class TgUploader:
     def cancel_download(self):
         self.is_cancelled = True
         LOGGER.info(f"Cancelling Upload: {self.name}")
-        self.__listener.onUploadError('your upload has been stopped!')
+        self.__listener.onUploadError('unggahan Anda telah dihentikan!')

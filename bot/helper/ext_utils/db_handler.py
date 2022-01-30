@@ -1,26 +1,11 @@
-<<<<<<< HEAD
-import psycopg2
-from psycopg2 import Error
-from bot import AUTHORIZED_CHATS, SUDO_USERS, DB_URI, LOGGER
-=======
 from os import path as ospath, makedirs
 from psycopg2 import connect, DatabaseError
 
 from bot import DB_URI, AUTHORIZED_CHATS, SUDO_USERS, AS_DOC_USERS, AS_MEDIA_USERS, rss_dict, LOGGER
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
 class DbManger:
     def __init__(self):
         self.err = False
-<<<<<<< HEAD
-
-    def connect(self):
-        try:
-            self.conn = psycopg2.connect(DB_URI)
-            self.cur = self.conn.cursor()
-        except psycopg2.DatabaseError as error :
-            LOGGER.error("Error in dbMang : ", error)
-=======
         self.connect()
 
     def connect(self):
@@ -29,66 +14,12 @@ class DbManger:
             self.cur = self.conn.cursor()
         except DatabaseError as error:
             LOGGER.error(f"Error in DB connection: {error}")
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
             self.err = True
 
     def disconnect(self):
         self.cur.close()
         self.conn.close()
 
-<<<<<<< HEAD
-    def db_auth(self,chat_id: int):
-        self.connect()
-        if self.err:
-            return "Ada beberapa log pemeriksaan kesalahan untuk detailnya"
-        sql = 'INSERT INTO users VALUES ({});'.format(chat_id)
-        self.cur.execute(sql)
-        self.conn.commit()
-        self.disconnect()
-        AUTHORIZED_CHATS.add(chat_id)
-        return 'Diotorisasi dengan sukses'
-
-    def db_unauth(self,chat_id: int):
-        self.connect()
-        if self.err:
-            return "Ada beberapa log pemeriksaan kesalahan untuk detailnya"
-        sql = 'DELETE from users where uid = {};'.format(chat_id)
-        self.cur.execute(sql)
-        self.conn.commit()
-        self.disconnect()
-        AUTHORIZED_CHATS.remove(chat_id)
-        return 'Berhasil tidak diotorisasi'
-
-    def db_addsudo(self,chat_id: int):
-        self.connect()
-        if self.err:
-            return "Ada beberapa log pemeriksaan kesalahan untuk detailnya"
-        if chat_id in AUTHORIZED_CHATS:
-            sql = 'UPDATE users SET sudo = TRUE where uid = {};'.format(chat_id)
-            self.cur.execute(sql)
-            self.conn.commit()
-            self.disconnect()
-            SUDO_USERS.add(chat_id)
-            return 'Berhasil dipromosikan sebagai Sudo'
-        else:
-            sql = 'INSERT INTO users VALUES ({},TRUE);'.format(chat_id)
-            self.cur.execute(sql)
-            self.conn.commit()
-            self.disconnect()
-            SUDO_USERS.add(chat_id)
-            return 'Berhasil Diotorisasi dan dipromosikan sebagai Sudo'
-
-    def db_rmsudo(self,chat_id: int):
-        self.connect()
-        if self.err:
-            return "Ada beberapa log pemeriksaan kesalahan untuk detailnya"
-        sql = 'UPDATE users SET sudo = FALSE where uid = {};'.format(chat_id)
-        self.cur.execute(sql)
-        self.conn.commit()
-        self.disconnect()
-        SUDO_USERS.remove(chat_id)
-        return 'Berhasil dihapus dari Sudo'
-=======
     def db_init(self):
         if self.err:
             return
@@ -278,4 +209,3 @@ class DbManger:
 if DB_URI is not None:
     DbManger().db_init()
 
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9

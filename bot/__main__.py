@@ -1,47 +1,3 @@
-<<<<<<< HEAD
-import shutil, psutil
-import signal
-import os
-import asyncio
-
-from pyrogram import idle
-from sys import executable
-
-from telegram import ParseMode
-from telegram.ext import CommandHandler
-from telegraph import Telegraph
-from wserver import start_server_async
-from bot import bot, app, dispatcher, updater, botStartTime, IGNORE_PENDING_REQUESTS, IS_VPS, PORT, alive, web, OWNER_ID, AUTHORIZED_CHATS, telegraph_token
-from bot.helper.ext_utils import fs_utils
-from bot.helper.telegram_helper.bot_commands import BotCommands
-from bot.helper.telegram_helper.message_utils import *
-from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
-from .helper.telegram_helper.filters import CustomFilters
-from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, leech_settings
-
-
-def stats(update, context):
-    currentTime = get_readable_time(time.time() - botStartTime)
-    total, used, free = shutil.disk_usage('.')
-    total = get_readable_file_size(total)
-    used = get_readable_file_size(used)
-    free = get_readable_file_size(free)
-    sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
-    recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
-    cpuUsage = psutil.cpu_percent(interval=0.5)
-    memory = psutil.virtual_memory().percent
-    disk = psutil.disk_usage('/').percent
-    stats = f'<b>👾Waktu Aktif Bot:</b> <code>{currentTime}</code>\n' \
-            f'<b>💾Total Ruang Disk:</b> <code>{total}</code>\n' \
-            f'<b>📀Digunakan:</b> <code>{used}</code> ' \
-            f'<b>💿Bebas:</b> <code>{free}</code>\n\n' \
-            f'<b>📤Unggah:</b> <code>{sent}</code>\n' \
-            f'<b>📥Unduh:</b> <code>{recv}</code>\n\n' \
-            f'<b>CPU:</b> <code>{cpuUsage}%</code> ' \
-            f'<b>RAM:</b> <code>{memory}%</code> ' \
-            f'<b>DISK:</b> <code>{disk}%</code>'
-=======
 import signal
 import os
 
@@ -101,51 +57,13 @@ def stats(update, context):
             f'<b>Memory Total:</b> {mem_t}\n'\
             f'<b>Memory Free:</b> {mem_a}\n'\
             f'<b>Memory Used:</b> {mem_u}\n'
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     sendMessage(stats, context.bot, update)
 
 
 def start(update, context):
-<<<<<<< HEAD
-    buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Channel", "https://t.me/AVEYNT")
-    buttons.buildbutton("Group", "https://t.me/AVEYNT/5")
-    reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
-    if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
-        start_string = f'''
-Bot ini dapat mencerminkan semua tautan Anda ke Google Drive!
-Ketik /{BotCommands.HelpCommand} untuk mendapatkan daftar perintah yang tersedia
-'''
-        sendMarkup(start_string, context.bot, update, reply_markup)
-    else:
-        sendMarkup(
-            'Ups! bukan pengguna Resmi.',
-            context.bot,
-            update,
-            reply_markup,
-        )
-
-
-def restart(update, context):
-    restart_message = sendMessage("Mulai ulang, Harap tunggu!", context.bot, update)
-    # Save restart message object in order to reply to it after restarting
-    with open(".restartmsg", "w") as f:
-        f.truncate(0)
-        f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
-    fs_utils.clean_all()
-    alive.terminate()
-    web.terminate()
-    os.execl(executable, executable, "-m", "bot")
-
-
-def ping(update, context):
-    start_time = int(round(time.time() * 1000))
-    reply = sendMessage("Memulai Ping", context.bot, update)
-    end_time = int(round(time.time() * 1000))
-=======
     buttons = ButtonMaker()
-    buttons.buildbutton("Repo", "https://www.github.com/anasty17/mirror-leech-telegram-bot")
-    buttons.buildbutton("Report Group", "https://t.me/+MwgSi5vmQEA2N2Vk")
+    buttons.buildbutton("Bot", "https://t.me/overmodularbot")
+    buttons.buildbutton("Support Group", "https://t.me/aveycamp")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
@@ -154,7 +72,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
-        sendMarkup('Not Authorized user, deploy your own mirror-leech bot', context.bot, update, reply_markup)
+        sendMarkup('Not Authorized user', context.bot, update, reply_markup)
 
 def restart(update, context):
     restart_message = sendMessage("Restarting...", context.bot, update)
@@ -182,7 +100,6 @@ def ping(update, context):
     start_time = int(round(time() * 1000))
     reply = sendMessage("Starting Ping", context.bot, update)
     end_time = int(round(time() * 1000))
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     editMessage(f'{end_time - start_time} ms', reply)
 
 
@@ -191,149 +108,6 @@ def log(update, context):
 
 
 help_string_telegraph = f'''<br>
-<<<<<<< HEAD
-<b>/{BotCommands.HelpCommand}</b>: Untuk mendapatkan pesan ini
-<br><br>
-<b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring link ke Google Drive.
-<br><br>
-<b>/{BotCommands.TarMirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring dan unggah versi unduhan (.tar) yang diarsipkan
-<br><br>
-<b>/{BotCommands.ZipMirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring dan unggah versi unduhan (.zip) yang diarsipkan
-<br><br>
-<b>/{BotCommands.UnzipMirrorCommand}</b> [download_url][magnet_link]: Mulai mirroring dan jika file yang diunduh adalah arsip apa pun, ekstrak ke Google Drive
-<br><br>
-<b>/{BotCommands.QbMirrorCommand}</b> [magnet_link]: Mulai Mencerminkan menggunakan qBittorrent, Gunakan <b>/{BotCommands.QbMirrorCommand} s</b> untuk memilih file sebelum mengunduh
-<br><br>
-<b>/{BotCommands.QbTarMirrorCommand}</b> [magnet_link]: Mulai mirroring menggunakan qBittorrent dan unggah versi unduhan (.tar) yang diarsipkan
-<br><br>
-<b>/{BotCommands.QbZipMirrorCommand}</b> [magnet_link]: Mulai mirroring menggunakan qBittorrent dan unggah versi unduhan (.zip) yang diarsipkan
-<br><br>
-<b>/{BotCommands.QbUnzipMirrorCommand}</b> [magnet_link]: Mulai mirroring menggunakan qBittorrent dan jika file yang diunduh adalah arsip apa pun, ekstrak ke Google Drive
-<br><br>
-<b>/{BotCommands.LeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.TarLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.tar). [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.ZipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.zip). [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.UnzipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan jika file adalah arsip apa pun, ekstraklah. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.QbLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.QbTarLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.tar) menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.QbZipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan mengunggahnya sebagai (.zip) menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.QbUnzipLeechCommand}</b> Perintah ini harus digunakan sebagai balasan untuk tautan Magnet, tautan Torrent, atau tautan Langsung dan jika file adalah arsip apa pun, ekstrak menggunakan qBittorrent. [perintah ini akan mengirim SPAM obrolan dan mengirim unduhan file terpisah, jika ada lebih dari satu file, dalam Torrent yang ditentukan]
-<br><br>
-<b>/{BotCommands.CloneCommand}</b> [drive_url]: Salin file/folder ke Google Drive
-<br><br>
-<b>/{BotCommands.CountCommand}</b> [drive_url]: Hitung file/folder Link Google Drive
-<br><br>
-<b>/{BotCommands.DeleteCommand}</b> [drive_url]: Hapus file dari Google Drive (Hanya Pemilik & Sudo)
-<br><br>
-<b>/{BotCommands.WatchCommand}</b> [tautan yang didukung youtube-dl]: Mencerminkan melalui youtube-dl. Klik <b>/{BotCommands.WatchCommand}</b> untuk bantuan lebih lanjut
-<br><br>
-<b>/{BotCommands.TarWatchCommand}</b> [tautan yang didukung youtube-dl]: Cerminkan melalui youtube-dl dan tar sebelum mengunggah
-<br><br>
-<b>/{BotCommands.ZipWatchCommand}</b> [tautan yang didukung youtube-dl]: Cerminkan melalui youtube-dl dan zip sebelum mengunggah
-<br><br>
-<b>/{BotCommands.LeechWatchCommand}</b> Lintah melalui youtube-dl
-<br><br>
-<b>/{BotCommands.LeechTarWatchCommand}</b> Lintah melalui youtube-dl dan tar sebelum mengunggah
-<br><br>
-<b>/{BotCommands.LeechZipWatchCommand}</b> Lintah melalui youtube-dl dan zip sebelum mengunggah
-<br><br>
-<b>/{BotCommands.LeechSetCommand}</b> Setelan Lintah
-<br><br>
-<b>/{BotCommands.SetThumbCommand}</b> Balas ke foto untuk menetapkannya sebagai thumbnail untuk unggahan berikutnya
-<br><br>
-<b>/{BotCommands.CancelMirror}</b>: Membalas pesan di mana unduhan dimulai dan unduhan itu akan dibatalkan
-<br><br>
-<b>/{BotCommands.CancelAllCommand}</b>: Batalkan semua yang sedang berjalan
-'''
-help = Telegraph(access_token=telegraph_token).create_page(
-        title='OverMod Help',
-        author_name='OverMod',
-        author_url='https://t.me/OverModularBot',
-        html_content=help_string_telegraph,
-    )["path"]
-
-help_string = f'''
-/{BotCommands.PingCommand}: Periksa berapa lama waktu yang dibutuhkan untuk melakukan Ping ke Bot
-
-/{BotCommands.AuthorizeCommand}: Mengotorisasi obrolan atau pengguna untuk menggunakan bot (Hanya dapat dipanggil oleh Pemilik & Sudo bot)
-
-/{BotCommands.UnAuthorizeCommand}: Membatalkan otorisasi obrolan atau pengguna untuk menggunakan bot (Hanya dapat dipanggil oleh Pemilik & Sudo bot)
-
-/{BotCommands.AuthorizedUsersCommand}: Menampilkan pengguna yang diotorisasi (Hanya Pemilik & Sudo)
-
-/{BotCommands.AddSudoCommand}: Tambahkan pengguna sudo (Hanya Pemilik)
-
-/{BotCommands.RmSudoCommand}: Hapus pengguna sudo (Hanya Pemilik)
-
-/{BotCommands.RestartCommand}: Mulai ulang bot
-
-/{BotCommands.LogCommand}: Dapatkan file log bot. Berguna untuk mendapatkan laporan kerusakan
-
-/{BotCommands.SpeedCommand}: Memeriksa Kecepatan Internet Tuan Rumah
-
-/{BotCommands.ShellCommand}: Menjalankan perintah di Shell (Hanya Pemilik)
-
-/{BotCommands.ExecHelpCommand}: Dapatkan bantuan untuk modul Executor (Hanya Pemilik)
-
-/{BotCommands.TsHelpCommand}: Dapatkan bantuan untuk modul pencarian Torrent
-'''
-
-def bot_help(update, context):
-    button = button_build.ButtonMaker()
-    button.buildbutton("Perintah lainnya🛠", f"https://telegra.ph/{help}")
-    reply_markup = InlineKeyboardMarkup(button.build_menu(1))
-    sendMarkup(help_string, context.bot, update, reply_markup)
-
-'''
-botcmds = [
-        (f'{BotCommands.HelpCommand}','Get Detailed Help'),
-        (f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
-        (f'{BotCommands.TarMirrorCommand}','Start mirroring and upload as .tar'),
-        (f'{BotCommands.ZipMirrorCommand}','Start mirroring and upload as .zip'),
-        (f'{BotCommands.UnzipMirrorCommand}','Extract files'),
-        (f'{BotCommands.QbMirrorCommand}','Start Mirroring using qBittorrent'),
-        (f'{BotCommands.QbTarMirrorCommand}','Start mirroring and upload as .tar using qb'),
-        (f'{BotCommands.QbZipMirrorCommand}','Start mirroring and upload as .zip using qb'),
-        (f'{BotCommands.QbUnzipMirrorCommand}','Extract files using qBitorrent'),
-        (f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
-        (f'{BotCommands.CountCommand}','Count file/folder of Drive link'),
-        (f'{BotCommands.DeleteCommand}','Delete file from Drive'),
-        (f'{BotCommands.WatchCommand}','Mirror Youtube-dl support link'),
-        (f'{BotCommands.TarWatchCommand}','Mirror Youtube playlist link as .tar'),
-        (f'{BotCommands.ZipWatchCommand}','Mirror Youtube playlist link as .zip'),
-        (f'{BotCommands.CancelMirror}','Cancel a task'),
-        (f'{BotCommands.CancelAllCommand}','Cancel all tasks'),
-        (f'{BotCommands.ListCommand}','Searches files in Drive'),
-        (f'{BotCommands.StatusCommand}','Get Mirror Status message'),
-        (f'{BotCommands.StatsCommand}','Bot Usage Stats'),
-        (f'{BotCommands.PingCommand}','Ping the Bot'),
-        (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
-        (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
-        (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')
-    ]
-'''
-
-def main():
-    fs_utils.start_cleanup()
-    if IS_VPS:
-        asyncio.get_event_loop().run_until_complete(start_server_async(PORT))
-    # Check if the bot is restarting
-    if os.path.isfile(".restartmsg"):
-        with open(".restartmsg") as f:
-            chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Berhasil memulai ulang!", chat_id, msg_id)
-        os.remove(".restartmsg")
-    elif OWNER_ID:
-        try:
-            text = "<b>OverMod Siap Bertugas✨!</b>"
-=======
 <b>/{BotCommands.HelpCommand}</b>: To get this message
 <br><br>
 <b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Start mirroring to Google Drive. Send <b>/{BotCommands.MirrorCommand}</b> for more help
@@ -402,7 +176,7 @@ def main():
 '''
 
 help = telegraph.create_page(
-        title='Mirror-Leech-Bot Help',
+        title='Over Modular Help',
         content=help_string_telegraph,
     )["path"]
 
@@ -433,6 +207,7 @@ help_string = f'''
 def bot_help(update, context):
     button = ButtonMaker()
     button.buildbutton("Other Commands", f"https://telegra.ph/{help}")
+    button.buildbutton("Donate", f"https://telegra.ph/Sedekah-Su-01-30")
     reply_markup = InlineKeyboardMarkup(button.build_menu(1))
     sendMarkup(help_string, context.bot, update, reply_markup)
 
@@ -484,18 +259,13 @@ def main():
     elif OWNER_ID:
         try:
             text = "<b>Bot Restarted!</b>"
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
             bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
             if AUTHORIZED_CHATS:
                 for i in AUTHORIZED_CHATS:
                     bot.sendMessage(chat_id=i, text=text, parse_mode=ParseMode.HTML)
         except Exception as e:
             LOGGER.warning(e)
-<<<<<<< HEAD
-    # bot.set_my_commands(botcmds)
-=======
 
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     start_handler = CommandHandler(BotCommands.StartCommand, start, run_async=True)
     ping_handler = CommandHandler(BotCommands.PingCommand, ping,
                                   filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
@@ -513,14 +283,10 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
-    LOGGER.info("Bot Started!")
-<<<<<<< HEAD
-    signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
-=======
+    LOGGER.info("Over Modular Online!")
     signal.signal(signal.SIGINT, exit_clean_up)
     if rss_session is not None:
         rss_session.start()
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
 app.start()
 main()

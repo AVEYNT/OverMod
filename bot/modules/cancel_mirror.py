@@ -1,20 +1,11 @@
 from telegram.ext import CommandHandler
-<<<<<<< HEAD
-=======
 from time import sleep
 
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 from bot import download_dict, dispatcher, download_dict_lock, DOWNLOAD_DIR
 from bot.helper.ext_utils.fs_utils import clean_download
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
-<<<<<<< HEAD
-from bot.helper.telegram_helper.message_utils import *
-
-from time import sleep
-=======
 from bot.helper.telegram_helper.message_utils import sendMessage
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 from bot.helper.ext_utils.bot_utils import getDownloadByGid, MirrorStatus, getAllDownload
 
 
@@ -25,11 +16,7 @@ def cancel_mirror(update, context):
         gid = args[1]
         dl = getDownloadByGid(gid)
         if not dl:
-<<<<<<< HEAD
-            sendMessage(f"GID: <code>{gid}</code> Tidak Ditemukan.", context.bot, update)
-=======
             sendMessage(f"GID: <code>{gid}</code> Not Found.", context.bot, update)
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
             return
         mirror_message = dl.message
     elif update.message.reply_to_message:
@@ -40,33 +27,6 @@ def cancel_mirror(update, context):
                 dl = download_dict[mirror_message.message_id]
             except:
                 pass
-<<<<<<< HEAD
-    if len(args) == 1:
-        msg = f"Harap balas pesan <code>/{BotCommands.MirrorCommand}</code> yang digunakan untuk memulai pengunduhan atau kirim <code>/{BotCommands.CancelMirror} GID</code> untuk membatalkannya!"
-        if mirror_message and mirror_message.message_id not in keys:
-            if BotCommands.MirrorCommand in mirror_message.text or \
-               BotCommands.TarMirrorCommand in mirror_message.text or \
-               BotCommands.UnzipMirrorCommand in mirror_message.text:
-                msg1 = "Cermin Sudah Dibatalkan"
-                sendMessage(msg1, context.bot, update)
-            else:
-                sendMessage(msg, context.bot, update)
-            return
-        elif not mirror_message:
-            sendMessage(msg, context.bot, update)
-            return
-    if dl.status() == MirrorStatus.STATUS_ARCHIVING:
-        sendMessage("Pengarsipan Sedang Berlangsung, Anda Tidak Dapat Membatalkannya.", context.bot, update)
-    elif dl.status() == MirrorStatus.STATUS_EXTRACTING:
-        sendMessage("Ekstrak Sedang Berlangsung, Anda Tidak Dapat Membatalkannya.", context.bot, update)
-    elif dl.status() == MirrorStatus.STATUS_SPLITTING:
-        sendMessage("Perpecahan Sedang Berlangsung, Anda Tidak Dapat Membatalkannya.", context.bot, update)
-    else:
-        dl.download().cancel_download()
-        sleep(3)  # incase of any error with ondownloaderror listener
-        clean_download(f'{DOWNLOAD_DIR}{mirror_message.message_id}')
-
-=======
     if len(args) == 1 and (
         not mirror_message or mirror_message.message_id not in keys
     ):
@@ -81,7 +41,6 @@ def cancel_mirror(update, context):
         sendMessage("Split in Progress, You Can't Cancel It.", context.bot, update)
     else:
         dl.download().cancel_download()
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
 def cancel_all(update, context):
     count = 0
@@ -96,11 +55,7 @@ def cancel_all(update, context):
                 sleep(0.3)
         else:
             break
-<<<<<<< HEAD
-    sendMessage(f'{count} Unduhan telah Dibatalkan!', context.bot, update)
-=======
     sendMessage(f'{count} Download(s) has been Cancelled!', context.bot, update)
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
 
 

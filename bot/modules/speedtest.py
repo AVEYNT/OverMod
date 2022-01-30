@@ -1,17 +1,10 @@
 from speedtest import Speedtest
-<<<<<<< HEAD
-=======
 from telegram.ext import CommandHandler
 
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot import dispatcher
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import sendMessage, editMessage
-<<<<<<< HEAD
-from telegram.ext import CommandHandler
-=======
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
 
 def speedtest(update, context):
@@ -49,11 +42,7 @@ def speed_convert(size):
     return f"{round(size, 2)} {units[zero]}"
 
 
-<<<<<<< HEAD
-SPEED_HANDLER = CommandHandler(BotCommands.SpeedCommand, speedtest, 
-=======
 SPEED_HANDLER = CommandHandler(BotCommands.SpeedCommand, speedtest,
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
                                                   filters=CustomFilters.owner_filter | CustomFilters.authorized_user, run_async=True)
 
 dispatcher.add_handler(SPEED_HANDLER)

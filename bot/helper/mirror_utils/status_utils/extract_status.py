@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-from .status import Status
-from bot.helper.ext_utils.bot_utils import get_readable_file_size, MirrorStatus
-
-
-class ExtractStatus(Status):
-=======
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, MirrorStatus
 
 
 class ExtractStatus:
->>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     def __init__(self, name, path, size):
         self.__name = name
         self.__path = path

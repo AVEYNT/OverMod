@@ -1,11 +1,20 @@
 version: "3.3"
+<<<<<<< HEAD
    
 services:
   slam:
+=======
+
+services:
+  app:
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     build: .
     command: bash start.sh
     restart: on-failure
     ports:
       - "80:80"
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9

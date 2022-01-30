@@ -24,7 +24,11 @@ class CustomFilters:
     authorized_chat = _AuthorizedChat()
 
     class _SudoUser(MessageFilter):
+<<<<<<< HEAD
         def filter(self,message):
+=======
+        def filter(self, message):
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
             return bool(message.from_user.id in SUDO_USERS)
 
     sudo_user = _SudoUser()
@@ -43,7 +47,11 @@ class CustomFilters:
                             return True
                     else:
                         return False
+<<<<<<< HEAD
             if not message.reply_to_message and len(args) == 1:
+=======
+            elif not message.reply_to_message:
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
                 return True
             # Cancelling by replying to original mirror message
             reply_user = message.reply_to_message.from_user.id

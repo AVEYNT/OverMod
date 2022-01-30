@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 # (c) YashDK [yash-dk@github]
 
 import os
 import time
+=======
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# (c) YashDK [yash-dk@github]
+# Redesigned By - @bipuldey19 (https://github.com/SlamDevs/slam-mirrorbot/commit/1e572f4fa3625ecceb953ce6d3e7cf7334a4d542#diff-c3d91f56f4c5d8b5af3d856d15a76bd5f00aa38d712691b91501734940761bdd)
+
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 import logging
 import qbittorrentapi as qba
 import asyncio
@@ -25,7 +33,11 @@ page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent File Selector</title>
+<<<<<<< HEAD
     <link rel="icon" href="https://telegra.ph/file/6507910fd06d18dfaba82.jpg" type="image/jpg">
+=======
+    <link rel="icon" href="https://telegra.ph/file/cc06d0c613491080cc174.png" type="image/jpg">
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
@@ -81,7 +93,11 @@ header:hover, section:hover{
     align-items: center;
 }
 
+<<<<<<< HEAD
 img{ 
+=======
+img{
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid black;
@@ -185,11 +201,19 @@ input[type="submit"]:hover, input[type="submit"]:focus{
         width: 100%;
     }
 }
+<<<<<<< HEAD
   
 #treeview .parent {
     position: relative;
 }
   
+=======
+
+#treeview .parent {
+    position: relative;
+}
+
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 #treeview .parent > ul {
     display: none;
 }
@@ -201,6 +225,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     <header>
       <div class="brand">
         <img
+<<<<<<< HEAD
           src="https://telegra.ph/file/39a1878efeeb15b15633c.jpg"
           alt="logo"
         />
@@ -215,6 +240,25 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     </header>
     <section>
       <h2 class="intro">Select the files you want to download</h2>
+=======
+          src="https://telegra.ph/file/cc06d0c613491080cc174.png"
+          alt="logo"
+        />
+        <a href="https://t.me/anas_tayyar">
+          <h2 class="name">Qbittorrent Selection</h2>
+        </a>
+      </div>
+      <div class="social">
+        <a href="https://www.github.com/anasty17/mirror-leech-telegram-bot"><i class="fab fa-github"></i></a>
+        <a href="https://t.me/anas_tayyar"><i class="fab fa-telegram"></i></a>
+      </div>
+    </header>
+    <section>
+      <div class="intro">
+        <h4>Selected files size: <b id="checked_size">0</b> of <b id="total_size">0</b></h4>
+        <h4>Selected files: <b id="checked_files">0</b> of <b id="total_files">0</b></h4>
+      </div>
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
       <form action="{form_url}" method="POST">
        {My_content}
        <input type="submit" name="Select these files ;)">
@@ -223,6 +267,10 @@ input[type="submit"]:hover, input[type="submit"]:focus{
 
     <script>
       $(document).ready(function () {
+<<<<<<< HEAD
+=======
+        docready();
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
         var tags = $("li").filter(function () {
           return $(this).find("ul").length !== 0;
         });
@@ -244,6 +292,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
       });
 
       if(document.getElementsByTagName("ul").length >= 10){
+<<<<<<< HEAD
       var labels = document.querySelectorAll("label");
       //Shorting the file/folder names
       labels.forEach(function (label) {
@@ -275,6 +324,39 @@ input[type="submit"]:hover, input[type="submit"]:focus{
         }
       });
      }
+=======
+        var labels = document.querySelectorAll("label");
+        //Shorting the file/folder names
+        labels.forEach(function (label) {
+            if (label.innerText.toString().split(" ").length >= 9) {
+                let FirstPart = label.innerText
+                    .toString()
+                    .split(" ")
+                    .slice(0, 5)
+                    .join(" ");
+                let SecondPart = label.innerText
+                    .toString()
+                    .split(" ")
+                    .splice(-5)
+                    .join(" ");
+                label.innerText = `${FirstPart}... ${SecondPart}`;
+            }
+            if (label.innerText.toString().split(".").length >= 9) {
+                let first = label.innerText
+                    .toString()
+                    .split(".")
+                    .slice(0, 5)
+                    .join(" ");
+                let second = label.innerText
+                    .toString()
+                    .split(".")
+                    .splice(-5)
+                    .join(".");
+                label.innerText = `${first}... ${second}`;
+            }
+        });
+    }
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     </script>
 
 <script>
@@ -298,7 +380,11 @@ $('input[type="checkbox"]').change(function(e) {
       let returnValue = all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
       return returnValue;
     });
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     if (all && checked) {
       parent.children('input[type="checkbox"]').prop({
         indeterminate: false,
@@ -319,6 +405,59 @@ $('input[type="checkbox"]').change(function(e) {
   checkSiblings(container);
 });
 </script>
+<<<<<<< HEAD
+=======
+<script>
+    function docready () {
+        $("label[for^='filenode_']").css("cursor", "pointer");
+        $("label[for^='filenode_']").click(function () {
+            $(this).prev().click();
+        });
+        checked_size();
+        checkingfiles();
+        var total_files = $("label[for^='filenode_']").length;
+        $("#total_files").text(total_files);
+        var total_size = 0;
+        var ffilenode = $("label[for^='filenode_']");
+        ffilenode.each(function () {
+            var size = parseFloat($(this).data("size"));
+            total_size += size;
+            $(this).append(" - " + humanFileSize(size));
+        });
+        $("#total_size").text(humanFileSize(total_size));
+    };
+    function checked_size() {
+        var checked_size = 0;
+        var checkedboxes = $("input[name^='filenode_']:checked");
+        checkedboxes.each(function () {
+            var size = parseFloat($(this).data("size"));
+            checked_size += size;
+        });
+        $("#checked_size").text(humanFileSize(checked_size));
+    }
+    function checkingfiles() {
+        var checked_files = $("input[name^='filenode_']:checked").length;
+        $("#checked_files").text(checked_files);
+    }
+    $("input[name^='foldernode_']").change(function () {
+        checkingfiles();
+        checked_size();
+    });
+    $("input[name^='filenode_']").change(function () {
+        checkingfiles();
+        checked_size();
+    });
+    function humanFileSize(size) {
+        var i = -1;
+        var byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+        do {
+            size = size / 1024;
+            i++;
+        } while (size > 1024);
+        return Math.max(size, 0).toFixed(1) + byteUnits[i];
+    }
+</script>
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 </body>
 </html>
 """
@@ -330,7 +469,11 @@ code_page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent Code Checker</title>
+<<<<<<< HEAD
     <link rel="icon" href="https://telegra.ph/file/39a1878efeeb15b15633c.jpg" type="image/jpg"> 
+=======
+    <link rel="icon" href="https://telegra.ph/file/cc06d0c613491080cc174.png" type="image/jpg">
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -379,7 +522,11 @@ header:hover, section:hover{
     align-items: center;
 }
 
+<<<<<<< HEAD
 img{ 
+=======
+img{
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid black;
@@ -526,6 +673,7 @@ section span{
     <header>
       <div class="brand">
         <img
+<<<<<<< HEAD
           src="https://telegra.ph/file/39a1878efeeb15b15633c.jpg"
           alt="logo"
         />
@@ -536,6 +684,18 @@ section span{
       <div class="social">
         <a href="https://github.com/AVEYNT/OverMod"><i class="fab fa-github"></i></a>
         <a href="https://t.me/OverModbot"><i class="fab fa-telegram"></i></a>
+=======
+          src="https://telegra.ph/file/cc06d0c613491080cc174.png"
+          alt="logo"
+        />
+        <a href="https://t.me/anas_tayyar">
+          <h2 class="name">Qbittorrent Selection</h2>
+        </a>
+      </div>
+      <div class="social">
+        <a href="https://www.github.com/anasty17/mirror-leech-telegram-bot"><i class="fab fa-github"></i></a>
+        <a href="https://t.me/anas_tayyar"><i class="fab fa-telegram"></i></a>
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
       </div>
     </header>
     <section>
@@ -545,7 +705,11 @@ section span{
           <input
             type="text"
             name="pin_code"
+<<<<<<< HEAD
             placeholder="Enter the code that you have got from telegram to access the torrent"
+=======
+            placeholder="Enter the code that you have got from Telegram to access the Torrent"
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -558,6 +722,7 @@ section span{
 </html>
 """
 
+<<<<<<< HEAD
 
 @routes.get('/overmod/files/{hash_id}')
 async def list_torrent_contents(request):
@@ -573,17 +738,37 @@ async def list_torrent_contents(request):
     client = qba.Client(host="localhost", port="8090",
                         username="admin", password="adminadmin")
     client.auth_log_in()
+=======
+@routes.get('/app/files/{hash_id}')
+async def list_torrent_contents(request):
+
+    torr = request.match_info["hash_id"]
+    gets = request.query
+
+    if "pin_code" not in gets.keys():
+        rend_page = code_page.replace("{form_url}", f"/app/files/{torr}")
+        return web.Response(text=rend_page, content_type='text/html')
+
+    client = qba.Client(host="localhost", port="8090")
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     try:
         res = client.torrents_files(torrent_hash=torr)
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
+<<<<<<< HEAD
     count = 0
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     passw = ""
     for n in str(torr):
         if n.isdigit():
             passw += str(n)
+<<<<<<< HEAD
             count += 1
         if count == 4:
+=======
+        if len(passw) == 4:
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
             break
     if isinstance(passw, bool):
         raise web.HTTPNotFound()
@@ -595,6 +780,7 @@ async def list_torrent_contents(request):
 
     cont = ["", 0]
     nodes.create_list(par, cont)
+<<<<<<< HEAD
 
     rend_page = page.replace("{My_content}", cont[0])
     rend_page = rend_page.replace(
@@ -603,6 +789,13 @@ async def list_torrent_contents(request):
     return web.Response(text=rend_page, content_type='text/html')
 
 
+=======
+    rend_page = page.replace("{My_content}", cont[0])
+    rend_page = rend_page.replace("{form_url}", f"/app/files/{torr}?pin_code={pincode}")
+    client.auth_log_out()
+    return web.Response(text=rend_page, content_type='text/html')
+
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 async def re_verfiy(paused, resumed, client, torr):
 
     paused = paused.strip()
@@ -618,9 +811,13 @@ async def re_verfiy(paused, resumed, client, torr):
         verify = True
 
         for i in res:
+<<<<<<< HEAD
             if str(i.id) in paused:
                 if i.priority == 0:
                     continue
+=======
+            if str(i.id) in paused and i.priority != 0:
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
                 verify = False
                 break
 
@@ -632,6 +829,7 @@ async def re_verfiy(paused, resumed, client, torr):
             break
         LOGGER.info("Reverification Failed: correcting stuff...")
         client.auth_log_out()
+<<<<<<< HEAD
         client = qba.Client(host="localhost", port="8090",
                            username="admin", password="adminadmin")
         client.auth_log_in()
@@ -660,6 +858,31 @@ async def set_priority(request):
     client = qba.Client(host="localhost", port="8090",
                         username="admin", password="adminadmin")
     client.auth_log_in()
+=======
+        await asyncio.sleep(1)
+        client = qba.Client(host="localhost", port="8090")
+        try:
+            client.torrents_file_priority(torrent_hash=torr, file_ids=paused, priority=0)
+        except:
+            LOGGER.error("Errored in reverification paused")
+        try:
+            client.torrents_file_priority(torrent_hash=torr, file_ids=resumed, priority=1)
+        except:
+            LOGGER.error("Errored in reverification resumed")
+        k += 1
+        if k > 5:
+            client.auth_log_out()
+            return False
+    client.auth_log_out()
+    LOGGER.info("Verified")
+    return True
+
+@routes.post('/app/files/{hash_id}')
+async def set_priority(request):
+
+    torr = request.match_info["hash_id"]
+    client = qba.Client(host="localhost", port="8090")
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
     data = await request.post()
     resume = ""
@@ -679,16 +902,24 @@ async def set_priority(request):
     resume = resume.strip("|")
 
     try:
+<<<<<<< HEAD
         client.torrents_file_priority(
             torrent_hash=torr, file_ids=pause, priority=0)
+=======
+        client.torrents_file_priority(torrent_hash=torr, file_ids=pause, priority=0)
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
     except:
         LOGGER.error("Errored in paused")
 
     try:
+<<<<<<< HEAD
         client.torrents_file_priority(
             torrent_hash=torr, file_ids=resume, priority=1)
+=======
+        client.torrents_file_priority(torrent_hash=torr, file_ids=resume, priority=1)
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
     except:
@@ -697,15 +928,22 @@ async def set_priority(request):
     await asyncio.sleep(2)
     if not await re_verfiy(pause, resume, client, torr):
         LOGGER.error("Verification Failed")
+<<<<<<< HEAD
     client.auth_log_out()
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
     return await list_torrent_contents(request)
 
 
 @routes.get('/')
 async def homepage(request):
 
+<<<<<<< HEAD
     return web.Response(text="<h1>See Over-Mod-bot  <a href='https://github.com/AVEYNT/OverMod'>@GitHub</a> By <a href='https://github.com/AVEYNT'>AVEY NATA</a></h1>", content_type="text/html")
 
+=======
+    return web.Response(text="<h1>See mirror-leech-telegram-bot <a href='https://www.github.com/anasty17/mirror-leech-telegram-bot'>@GitHub</a> By <a href='https://github.com/anasty17'>Anas</a></h1>", content_type="text/html")
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 
 async def e404_middleware(app, handler):
 
@@ -714,11 +952,19 @@ async def e404_middleware(app, handler):
         try:
             response = await handler(request)
             if response.status == 404:
+<<<<<<< HEAD
                 return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
             return response
         except web.HTTPException as ex:
             if ex.status == 404:
                 return web.Response(text="<h1>404: Page not found</h2><br><h3>slam-mirrorbot</h3>", content_type="text/html")
+=======
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>mirror-leech-telegram-bot</h3>", content_type="text/html")
+            return response
+        except web.HTTPException as ex:
+            if ex.status == 404:
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>mirror-leech-telegram-bot</h3>", content_type="text/html")
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
             raise
     return middleware_handler
 
@@ -728,7 +974,10 @@ async def start_server():
     app.add_routes(routes)
     return app
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 async def start_server_async(port=80):
 
     app = web.Application(middlewares=[e404_middleware])

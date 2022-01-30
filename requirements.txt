@@ -1,17 +1,30 @@
 aiohttp
 anytree
+<<<<<<< HEAD
 aria2p
 appdirs
 attrdict
 beautifulsoup4
 cloudscrape
 feedparser
+=======
+appdirs
+aria2p
+attrdict
+beautifulsoup4
+cfscrape
+feedparser
+gc-python-utils
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
 gunicorn
+<<<<<<< HEAD
 hachoir
 js2py
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 lk21
 lxml
 pillow
@@ -19,16 +32,27 @@ psutil
 psycopg2-binary
 pybase64
 pyrogram
+<<<<<<< HEAD
 pyshorteners
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 python-dotenv
 python-magic
 python-telegram-bot
 qbittorrent-api
 requests
 speedtest-cli
+<<<<<<< HEAD
+=======
+six
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 telegraph
 tenacity
 TgCrypto
 torrentool==1.1.0
 urllib3
+<<<<<<< HEAD
 youtube_dl
+=======
+yt-dlp
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9

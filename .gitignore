@@ -1,13 +1,27 @@
 config.env
 *auth_token.txt
 *.pyc
+<<<<<<< HEAD
 downloads/*
 download/*
+=======
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9
 data*
 .vscode
 .idea
 *.json
 *.pickle
+<<<<<<< HEAD
 authorized_chats.txt
 log.txt
 accounts/*
+=======
+.netrc
+log.txt
+authorized_chats.txt
+sudo_users.txt
+accounts/*
+Thumbnails/*
+drive_folder
+cookies.txt
+>>>>>>> 2aaacf0bec6285ef29ff9bbb699762804dca37c9

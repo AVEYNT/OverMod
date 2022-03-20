@@ -57,4 +57,4 @@ class TelegraphHelper:
 			return self.edit_page(path, title, content)
 
 
-telegraph=TelegraphHelper('OverModular', 't.me/OverModulerbot')
+telegraph=TelegraphHelper('Over Modular', 'https://t.me/OverModulerbot')

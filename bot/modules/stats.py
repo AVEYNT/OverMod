@@ -3,6 +3,7 @@
 from psutil import disk_usage, cpu_percent, swap_memory, cpu_count, virtual_memory, net_io_counters
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from time import time
+import asyncio
 from pyrogram import filters
 from subprocess import run
 import requests

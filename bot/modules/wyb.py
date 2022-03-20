@@ -1,4 +1,4 @@
-rfrom telegram import Message
+from telegram import Message
 import waybackpy, re, random
 from telegram.ext import CommandHandler
 from bot import LOGGER, dispatcher

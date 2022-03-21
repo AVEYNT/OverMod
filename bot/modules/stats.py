@@ -81,7 +81,7 @@ def getHerokuDetails(h_api_key, h_app_name):
         return None
 
 def stats(update, context):
-    buttons = button_build.BuildMaker()
+    buttons = button_build.ButtonMaker()
     buttons.sbutton("Stats", f"stats_callback")
     reply_markup = InlineKeyboardMarkup(button.build_menu(1))
     currentTime = get_readable_time(time() - botStartTime)

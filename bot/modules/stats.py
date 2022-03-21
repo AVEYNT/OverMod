@@ -83,7 +83,7 @@ def getHerokuDetails(h_api_key, h_app_name):
 def stats(update, context):
     buttons = button_build.ButtonMaker()
     buttons.sbutton("Stats", f"stats_callback")
-    reply_markup = InlineKeyboardMarkup(button.build_menu(1))
+    reply_markup = InlineKeyboardMarkup(buttons.build_menu(1))
     currentTime = get_readable_time(time() - botStartTime)
     total, used, free, disk= disk_usage('/')
     total = get_readable_file_size(total)

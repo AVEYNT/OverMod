@@ -9,7 +9,7 @@ from subprocess import run
 import requests
 from bot import app, LOGGER, dispatcher, botStartTime, HEROKU_API_KEY, HEROKU_APP_NAME
 from telegram import ParseMode, InlineKeyboardMarkup
-from telegram.ext import CommandHandler
+from telegram.ext import CommandHandler, CallbackQueryHandler
 from bot.helper.telegram_helper.message_utils import sendMessage
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
@@ -19,7 +19,7 @@ from bot.helper.telegram_helper.button_build import ButtonMaker
 from bot.helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, sendLogFile
 
 @app.on_callback_query(filters.regex("stats_callback"))
-async def stats_callbacc(_, CallbackQuery):
+async def stats_callback(_, CallbackQuery):
     text = await bot_sys_stats()
     await app.answer_callback_query(CallbackQuery.id, text, show_alert=True)
 

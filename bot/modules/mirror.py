@@ -285,7 +285,7 @@ class MirrorListener:
         else:
             update_all_messages()
 
-def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None):
+def _mirror(bot, message, update, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None):
     mesg = message.text.split('\n')
     message_args = mesg[0].split(' ', maxsplit=1)
     name_args = mesg[0].split('|', maxsplit=1)
@@ -445,7 +445,7 @@ def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=Fals
         msg = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a> (<code>{update.message.from_user.id}</code>) send link {pesan} ..'
         if not link.startswith("https://api.telegram.org"):
            mssg = sendMessage("Processing your request..", bot, update)
-           time.sleep(2)
+           sleep(2)
            editMessage(msg, mssg)
         Thread(target=add_aria2c_download, args=(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)).start()
 

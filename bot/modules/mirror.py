@@ -34,7 +34,7 @@ from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.mirror_utils.upload_utils.pyrogramEngine import TgUploader
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.filters import CustomFilters
-from bot.helper.telegram_helper.message_utils import sendMessage, sendMarkup, delete_all_messages, update_all_messages
+from bot.helper.telegram_helper.message_utils import sendMessage, sendMarkup, editMessage, delete_all_messages, update_all_messages
 from bot.helper.telegram_helper.button_build import ButtonMaker
 
 
@@ -438,6 +438,15 @@ def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=Fals
         Thread(target=add_qb_torrent, args=(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, qbitsel)).start()
 
     else:
+        if reply_to is not None:
+           pesan = reply_to.text
+        else:
+           pesan = update.message.text.split()[1]
+        msg = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a> (<code>{update.message.from_user.id}</code>) send link {pesan} ..'
+        if not link.startswith("https://api.telegram.org"):
+           mssg = sendMessage("Processing your request..", bot, update)
+           sleep(2)
+           editMessage(msg, mssg)
         Thread(target=add_aria2c_download, args=(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)).start()
 
 def mirror(update, context):

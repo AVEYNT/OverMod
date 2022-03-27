@@ -438,9 +438,6 @@ def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=Fals
         Thread(target=add_qb_torrent, args=(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, qbitsel)).start()
 
     else:
-        if reply_to is not None:
-           pesan = reply_to.text
-        else:
         Thread(target=add_aria2c_download, args=(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)).start()
 
 def mirror(update, context):

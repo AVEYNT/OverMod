@@ -33,14 +33,13 @@ def rss_get(update, context):
                 msg = sendMessage(f"Getting the last <b>{count}</b> item(s) from {title}", context.bot, update.message)
                 rss_d = feedparse(feed_url[0])
                 item_info = ""
-                dlq = f"Lihat disini!"
                 for item_num in range(count):
                     try:
                         link = rss_d.entries[item_num]['links'][1]['href']
                     except IndexError:
                         link = rss_d.entries[item_num]['link']
                     item_info += f"<b>Name: </b><code>{rss_d.entries[item_num]['title'].replace('>', '').replace('<', '')}</code>\n"
-                    item_info += f"<b>Link: </b><a href="{link}">{dlq}</a>\n\n"
+                    item_info += f"<b>Link: </b><a href="{link}">"Lihat Disini!"</a>\n\n"
                 editMessage(item_info, msg)
             except IndexError as e:
                 LOGGER.error(str(e))

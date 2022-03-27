@@ -33,3 +33,4 @@ yt-dlp
 waybackpy
 heroku3
 pyshorteners
+mediainfo

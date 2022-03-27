@@ -192,15 +192,16 @@ def virustotal(update, context):
     help_msg += f"\n<code>/{BotCommands.VirusTotalCommand}" + " {message}" + "</code>"
     help_msg += "\n<b>By replying to message (including hash):</b>"
     help_msg += f"\n<code>/{BotCommands.VirusTotalCommand}" + " {message}" + "</code>"
+    sent = sendMessage('Running VirusTotal Scan. Wait for finish.', context.bot, update)
     link = None
     if message.reply_to_message:
         if message.reply_to_message.document: # file
             maxsize = 210*1024*1024
             if VIRUSTOTAL_FREE: maxsize = 32*1024*1024
             if message.reply_to_message.document.file_size > maxsize:
-                return sendMessage(f"File limit is {humanbytes(maxsize)}", context.bot, update)
+                return editMessage(f"File limit is {humanbytes(maxsize)}", sent)
             try:
-                sent = sendMessage(f"Trying to download. Please wait.", context.bot, update)
+                editMessage(f"Trying to download. Please wait.", sent)
                 filename = os.path.join(VtPath, message.reply_to_message.document.file_name)
                 link = app.download_media(message=message.reply_to_message.document, file_name=filename)
             except Exception as e: LOGGER.error(e)

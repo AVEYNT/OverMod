@@ -39,7 +39,7 @@ def rss_get(update, context):
                     except IndexError:
                         link = rss_d.entries[item_num]['link']
                     item_info += f"<b>Name: </b><code>{rss_d.entries[item_num]['title'].replace('>', '').replace('<', '')}</code>\n"
-                    item_info += f"<b>Link: </b><a href={link}>Lihat Disini!</a>\n\n"
+                    item_info += f"<b>Link: </b>{link}\n\n"
                 editMessage(item_info, msg)
             except IndexError as e:
                 LOGGER.error(str(e))

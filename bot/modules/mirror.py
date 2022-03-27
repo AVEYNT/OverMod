@@ -285,8 +285,8 @@ class MirrorListener:
         else:
             update_all_messages()
 
-def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None):
-    mesg = update.message.text.split('\n')
+def _mirror(bot, message, isZip=False, extract=False, isQbit=False, isLeech=False, pswd=None):
+    mesg = message.text.split('\n')
     message_args = mesg[0].split(' ', maxsplit=1)
     name_args = mesg[0].split('|', maxsplit=1)
     qbitsel = False
@@ -441,7 +441,7 @@ def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False
         if reply_to is not None:
            pesan = reply_to.text
         else:
-           pesan = update.message.text.split()[1]
+           pesan = message.text.split()[1]
         msg = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a> (<code>{update.message.from_user.id}</code>) send link {pesan} ..'
         if not link.startswith("https://api.telegram.org"):
            mssg = sendMessage("Processing your request..", bot, update)
